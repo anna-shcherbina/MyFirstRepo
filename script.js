@@ -1,9 +1,9 @@
-let title = "JavaScript";
-let screens = "Простые, Сложные, Интерактивные";
-let screenPrice = 1000;
-let rollback = 10;
-let fullPrice = 5000;
-let adaptive = true;
+const title = "JavaScript";
+const screens = "Простые, Сложные, Интерактивные";
+const screenPrice = 1000;
+const rollback = 10;
+const fullPrice = 5000;
+const adaptive = true;
 
 alert("Hello world!");
 console.log("Hello console!");

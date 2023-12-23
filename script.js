@@ -1,51 +1,72 @@
 'use strict';
 
-const rollback = 10;
-
 const title = prompt("Как называется ваш проект?");
-
 const screens = prompt("Какие типы экранов нужно разработать?");
-
 const screenPrice = +prompt("Сколько будет стоить данная работа?");
-
 const adaptive = confirm("Нужен ли адаптив на сайте?");
-
 const service1 = prompt("Какой дополнительный тип услуги нужен?");
-
 const servicePrice1 = +prompt("Сколько это будет стоить?");
-
 const service2 = prompt("Какой дополнительный тип услуги нужен?");
-
 const servicePrice2 = +prompt("Сколько это будет стоить?");
+const rollback = 10;
+let allServicePrices;
+let fullPrice = screenPrice + servicePrice1 + servicePrice2;
+let servicePercentPrice = Math.ceil(fullPrice - fullPrice * (rollback / 100));
 
-const fullPrice = screenPrice + servicePrice1 + servicePrice2;
+const showTypeOf = function (variable) {
+    console.log(variable, typeof variable);
+};
 
-const servicePercentPrice = Math.ceil(fullPrice - fullPrice * (rollback / 100));
+function getServicePercentPrices() {
+    return Math.ceil(fullPrice - fullPrice * (rollback / 100))
+};
 
-switch (true) {
-    case fullPrice >= 30000:
-        console.log("Даем скидку в 10%");
-        break;
-    case 15000 <= fullPrice && fullPrice < 30000:
-        console.log("Даем скидку в 5%");
-        break;
-    case 0 <= fullPrice && fullPrice < 15000:
-        console.log("Скидка не предусмотрена");
-        break;
-    default:
-        console.log("Что то пошло не так");
-}
+servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
 
-alert("Hello world!");
-console.log("Hello console!");
+const getRollbackMessage = function (price) {
+    switch (true) {
+        case price >= 30000:
+            return "Даем скидку в 10%";
+            break;
+        case 15000 <= price && price < 30000:
+            return "Даем скидку в 5%";
+            break;
+        case 0 <= price && price < 15000:
+            return "Скидка не предусмотрена";
+            break;
+        default:
+            return "Что то пошло не так";
+    }
+};
 
-console.log(title);
+const getAllServicePrices = function (servicePrice1, servicePrice2) {
+    return servicePrice1 + servicePrice2
+};
+
+allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+
+function getFullPrice() {
+    return screenPrice + allServicePrices
+};
+
+fullPrice = getFullPrice(screenPrice, allServicePrices);
+
+function getTitle(str) {
+    if (title != str)
+        return title;
+    return title[0].toUpperCase() + title.slice(1);
+};
+
+showTypeOf(title);
+showTypeOf(screenPrice);
+showTypeOf(adaptive);
+
+console.log(getTitle(title));
+console.log(getRollbackMessage(fullPrice));
+
+console.log(typeof title);
+console.log(typeof screenPrice);
+console.log(typeof adaptive);
+
 console.log(screens);
-console.log(screenPrice);
-console.log(adaptive);
-console.log(service1);
-console.log(servicePrice1);
-console.log(service2);
-console.log(servicePrice2);
-console.log(fullPrice);
 console.log(servicePercentPrice);

@@ -10,30 +10,25 @@ const service2 = prompt("Какой дополнительный тип услу
 const servicePrice2 = +prompt("Сколько это будет стоить?");
 const rollback = 10;
 let allServicePrices;
-let fullPrice = screenPrice + servicePrice1 + servicePrice2;
-let servicePercentPrice = Math.ceil(fullPrice - fullPrice * (rollback / 100));
+let fullPrice;
+let servicePercentPrice;
 
 const showTypeOf = function (variable) {
     console.log(variable, typeof variable);
 };
 
-function getServicePercentPrices() {
+function getServicePercentPrices(fullPrice, rollback) {
     return Math.ceil(fullPrice - fullPrice * (rollback / 100))
 };
-
-servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
 
 const getRollbackMessage = function (price) {
     switch (true) {
         case price >= 30000:
             return "Даем скидку в 10%";
-            break;
         case 15000 <= price && price < 30000:
             return "Даем скидку в 5%";
-            break;
         case 0 <= price && price < 15000:
             return "Скидка не предусмотрена";
-            break;
         default:
             return "Что то пошло не так";
     }
@@ -43,19 +38,19 @@ const getAllServicePrices = function (servicePrice1, servicePrice2) {
     return servicePrice1 + servicePrice2
 };
 
-allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
-
-function getFullPrice() {
+function getFullPrice(screenPrice, allServicePrices) {
     return screenPrice + allServicePrices
 };
-
-fullPrice = getFullPrice(screenPrice, allServicePrices);
 
 function getTitle(str) {
     if (title != str)
         return title;
     return title[0].toUpperCase() + title.slice(1);
 };
+
+allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+fullPrice = getFullPrice(screenPrice, allServicePrices);
+servicePercentPrice = getServicePercentPrices(fullPrice, rollback); //все переопределения переменных - под функциями
 
 showTypeOf(title);
 showTypeOf(screenPrice);

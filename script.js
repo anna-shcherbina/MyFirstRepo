@@ -1,6 +1,6 @@
 'use strict';
 
-const title = prompt("Как называется ваш проект?");
+let title = prompt("Как называется ваш проект?");
 const screens = prompt("Какие типы экранов нужно разработать?");
 const screenPrice = +prompt("Сколько будет стоить данная работа?");
 const adaptive = confirm("Нужен ли адаптив на сайте?");
@@ -42,10 +42,12 @@ function getFullPrice(screenPrice, allServicePrices) {
     return screenPrice + allServicePrices
 };
 
-function getTitle(str) {
-    if (title != str)
+const getTitle = function (str) {
+    if (title != str) {
         return title;
-    return title[0].toUpperCase() + title.slice(1);
+    }
+    title = str.trim();
+    return title[0].toUpperCase() + title.slice(1).toLowerCase();
 };
 
 allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);

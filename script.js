@@ -43,11 +43,11 @@ function getFullPrice(screenPrice, allServicePrices) {
 };
 
 const getTitle = function (str) {
-    if (title != str) {
-        return title;
+    if (str != str) {
+        return str;
     }
-    title = str.trim();
-    return title[0].toUpperCase() + title.slice(1).toLowerCase();
+    str = str.trim();
+    return str[0].toUpperCase() + str.slice(1).toLowerCase();
 };
 
 allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);

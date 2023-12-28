@@ -46,26 +46,28 @@ const getRollbackMessage = function (price) {
 
 const getAllServicePrices = function () {
     let sum = 0;
+    let price = 0;
 
     for (let i = 0; i < 2; i++) {
 
         if (i === 0) {
             service1 = prompt("Какой дополнительный тип услуги нужен?");
+            price = 1000;
         } else if (i === 1) {
             service2 = prompt("Какой дополнительный тип услуги нужен?");
+            price = 2000;
         };
 
         do {
-            sum += +prompt("Сколько это будет стоить?");
-        }
-        while (sum === !isNumber(sum));
+            price = prompt("Сколько это будет стоить?");
 
+        } while (!isNumber(price))
+        sum += +price;
     };
 
     return sum;
 
 };
-
 
 const showTypeOf = function (variable) {
     console.log(variable, typeof variable);

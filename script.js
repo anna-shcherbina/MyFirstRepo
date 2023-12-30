@@ -20,15 +20,16 @@ const asking = function () {
     screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные");
 
     do {
-        screenPrice = +prompt("Сколько будет стоить данная работа?");
+        screenPrice = prompt("Сколько будет стоить данная работа?");
 
     } while (!isNumber(screenPrice));
+    screenPrice = +prompt("Сколько будет стоить данная работа?");
 
     adaptive = confirm("Нужен ли адаптив на сайте?");
 };
 
 const getServicePercentPrices = function (fullPrice, rollback) {
-    return fullPrice - (fullPrice * (rollback / 100));
+    return (Math.ceil(fullPrice - (fullPrice * (rollback / 100))));
 };
 
 const getRollbackMessage = function (price) {
@@ -78,9 +79,6 @@ const getFullPrice = function (screenPrice, allServicePrices) {
 };
 
 const getTitle = function (str) {
-    if (str != str) {
-        return str;
-    }
     str = str.trim();
     return str[0].toUpperCase() + str.slice(1).toLowerCase();
 };

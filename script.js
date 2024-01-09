@@ -1,35 +1,38 @@
 'use strict';
 
-let title;
-let screens;
-let screenPrice;
-let adaptive;
-let rollback = 10;
-let service1;
-let service2;
-let allServicePrices;
-let fullPrice;
-let servicePercentPrice;
+const appData = {
+    title: '',
+    screens: '',
+    screenPrice: 0,
+    adaptive: true,
+    rollback: 10,
+    service1: '',
+    service2: '',
+    allServicePrices: 0,
+    fullPrice: 0,
+    servicePercentPrice: 0,
+    asking: function () {
+        appData.title = prompt("Как называется ваш проект?", "Калькулятор верстки");
+        appData.screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные");
+
+        do {
+            appData.screenPrice = prompt("Сколько будет стоить данная работа?");
+
+        } while (!isNumber(appData.screenPrice));
+        appData.screenPrice = +appData.screenPrice;
+
+        appData.adaptive = confirm("Нужен ли адаптив на сайте?");
+    }
+}
 
 const isNumber = function (num) {
     return (!isNaN(parseFloat(num)) && isFinite(num));
 };
 
-const asking = function () {
-    title = prompt("Как называется ваш проект?", "Калькулятор верстки");
-    screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные");
 
-    do {
-        screenPrice = prompt("Сколько будет стоить данная работа?");
-
-    } while (!isNumber(screenPrice));
-    screenPrice = +screenPrice;
-
-    adaptive = confirm("Нужен ли адаптив на сайте?");
-};
 
 const getServicePercentPrices = function (fullPrice, rollback) {
-    return (Math.ceil(fullPrice - (fullPrice * (rollback / 100))));
+    return (Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback / 100))));
 };
 
 const getRollbackMessage = function (price) {
@@ -52,10 +55,10 @@ const getAllServicePrices = function () {
     for (let i = 0; i < 2; i++) {
 
         if (i === 0) {
-            service1 = prompt("Какой дополнительный тип услуги нужен?");
+            appData.service1 = prompt("Какой дополнительный тип услуги нужен?");
             price = 1000;
         } else if (i === 1) {
-            service2 = prompt("Какой дополнительный тип услуги нужен?");
+            appData.service2 = prompt("Какой дополнительный тип услуги нужен?");
             price = 2000;
         };
 
@@ -63,19 +66,15 @@ const getAllServicePrices = function () {
             price = prompt("Сколько это будет стоить?");
 
         } while (!isNumber(price))
-        sum += +price;
+        sum += +price; //если проверка на число проходит, то записываем в sum
     };
 
-    return sum;
+    return sum; //после 2х итераций возвращаем sum
 
-};
-
-const showTypeOf = function (variable) {
-    console.log(variable, typeof variable);
 };
 
 const getFullPrice = function (screenPrice, allServicePrices) {
-    return screenPrice + allServicePrices
+    return appData.screenPrice + appData.allServicePrices
 };
 
 const getTitle = function (str) {
@@ -83,24 +82,10 @@ const getTitle = function (str) {
     return str[0].toUpperCase() + str.slice(1).toLowerCase();
 };
 
-asking();
-allServicePrices = getAllServicePrices();
-fullPrice = getFullPrice(screenPrice, allServicePrices);
-servicePercentPrice = getServicePercentPrices(fullPrice, rollback); //все переопределения переменных - под функциями
+appData.asking();
+appData.allServicePrices = getAllServicePrices();
+appData.fullPrice = getFullPrice(appData.screenPrice, appData.allServicePrices);
+appData.servicePercentPrice = getServicePercentPrices(appData.fullPrice, appData.rollback); //все переопределения переменных - под функциями
 
-showTypeOf(title);
-showTypeOf(screenPrice);
-showTypeOf(adaptive);
-
-console.log("allServicePrices", allServicePrices);
-
-console.log(getTitle(title));
-console.log(getRollbackMessage(fullPrice));
-console.log(typeof title);
-console.log(typeof screenPrice);
-console.log(typeof adaptive);
-
-console.log(screens);
-console.log(servicePercentPrice);
-
-console.log("Стоимость верстки экранов " + screenPrice + " руб.", "Стоимость разработки сайта " + fullPrice + " руб.");
+console.log(appData.fullPrice);
+console.log(appData.servicePercentPrice);

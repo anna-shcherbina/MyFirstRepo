@@ -84,9 +84,9 @@ const appData = {
         return appData.screenPrice + appData.allServicePrices
     },
 
-    getTitle: function (str) {
-        str = str.trim();
-        return str[0].toUpperCase() + str.slice(1).toLowerCase();
+    getTitle: function () {
+        return appData.title.trim().toUpperCase().slice(0, 1)
+            + appData.title.trim().toLowerCase().substring(1);
     },
 
     logger: function () {

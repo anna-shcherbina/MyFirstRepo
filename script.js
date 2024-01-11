@@ -14,10 +14,10 @@ const appData = {
 
     start: function () {
         appData.asking();
-        appData.allServicePrices = appData.getAllServicePrices();
-        appData.fullPrice = appData.getFullPrice(appData.screenPrice, appData.allServicePrices);
-        appData.servicePercentPrice = appData.getServicePercentPrices(appData.fullPrice, appData.rollback);
-        appData.title = appData.getTitle();
+        appData.getAllServicePrices();
+        appData.getFullPrice(appData.screenPrice, appData.allServicePrices);
+        appData.getServicePercentPrices(appData.fullPrice, appData.rollback);
+        appData.getTitle();
         appData.logger();
     },
 
@@ -39,7 +39,7 @@ const appData = {
     },
 
     getServicePercentPrices: function (fullPrice, rollback) {
-        return (Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback / 100))));
+        appData.servicePercentPrice = (Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback / 100))));
     },
 
     getRollbackMessage: function (price) {
@@ -76,16 +76,16 @@ const appData = {
             sum += +price; //если проверка на число проходит, то записываем в sum
         };
 
-        return sum; //после 2х итераций возвращаем sum
+        appData.allServicePrices = sum; //после 2х итераций возвращаем sum
 
     },
 
     getFullPrice: function (screenPrice, allServicePrices) {
-        return appData.screenPrice + appData.allServicePrices
+        appData.fullPrice = appData.screenPrice + appData.allServicePrices
     },
 
     getTitle: function () {
-        return appData.title.trim().toUpperCase().slice(0, 1)
+        appData.title = appData.title.trim().toUpperCase().slice(0, 1)
             + appData.title.trim().toLowerCase().substring(1);
     },
 

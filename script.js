@@ -23,7 +23,7 @@ const appData = {
     asking: function () {
         appData.title = prompt("Как называется ваш проект?");
 
-        while (appData.isNumber(appData.title)) {
+        while (appData.isNumber(appData.title) || !appData.isString(appData.title)) {
             appData.title = prompt("Как называется ваш проект?");
         };
 
@@ -33,7 +33,7 @@ const appData = {
             let name = prompt("Какие типы экранов нужно разработать?");
             let price = 0;
 
-            while (appData.isNumber(name)) {
+            while (appData.isNumber(name) || !appData.isString(name)) {
                 name = prompt("Какие типы экранов нужно разработать?");
             };
 
@@ -53,7 +53,7 @@ const appData = {
             let name = prompt("Какой дополнительный тип услуги нужен?");
             let price = 0;
 
-            while (appData.isNumber(name)) {
+            while (appData.isNumber(name) || !appData.isString(name)) {
                 name = prompt("Какой дополнительный тип услуги нужен?");
             };
 
@@ -81,6 +81,10 @@ const appData = {
         for (let key in appData.services) {
             appData.allServicePrices += appData.services[key];
         }
+    },
+
+    isString: function (value) { //проверка не пропустит пробел, наж.Отмены, пробелЧисло
+        return isNaN(value);
     },
 
     isNumber: function (num) {

@@ -1,5 +1,17 @@
 'use strict';
 
+const titles = document.getElementsByTagName('h1');
+const buttons = document.getElementsByClassName('handler_btn');
+const buttonPlus = document.querySelector('.screen-btn');
+const otherItems = document.querySelectorAll('.other-items');
+const otherItemsPersent = document.querySelectorAll('.percent');
+const otherItemsNumber = document.querySelectorAll('.number');
+const inputRange = document.querySelector("div.main-controls__item.rollback input[type=range]");
+const spanRangeValue = document.querySelector("div.main-controls__item.rollback span[class=range-value]");
+const totalInput = document.getElementsByClassName("total-input");
+
+let divScreens = document.querySelectorAll('.screen');
+
 const appData = {
     title: '',
     screens: [],
@@ -121,15 +133,34 @@ const appData = {
         console.log(appData.fullPrice);
         console.log(appData.servicePercentPrice);
         console.log(appData.screens);
-
-        /*for (let key in appData) {
-            console.log("Ключ: " + key + " " + "Значение: " + appData[key]);
-        };*/
     }
 
 };
 
-appData.start();
+//appData.start();
+
+otherItemsPersent.forEach(function (items) {
+    console.log(items);
+});
+
+otherItemsNumber.forEach(function (items) {
+    console.log(items);
+});
+
+for (let item of totalInput) {
+    console.log(item);
+};
+
+console.log(titles[0]);
+console.log(buttons[0]);
+console.log(buttons[1]);
+console.log(buttonPlus);
+console.log(otherItems);
+console.log(inputRange);
+console.log(spanRangeValue);
+console.log(divScreens);
+
+
 
 
 

@@ -1,14 +1,19 @@
 'use strict';
 
-const titles = document.getElementsByTagName('h1');
-const buttons = document.getElementsByClassName('handler_btn');
+const title = document.getElementsByTagName('h1')[0];
+const buttonStart = document.getElementsByClassName('handler_btn')[0];
+const buttonReset = document.getElementsByClassName('handler_btn')[1];
 const buttonPlus = document.querySelector('.screen-btn');
 const otherItems = document.querySelectorAll('.other-items');
 const otherItemsPersent = document.querySelectorAll('.percent');
 const otherItemsNumber = document.querySelectorAll('.number');
 const inputRange = document.querySelector("div.main-controls__item.rollback input[type=range]");
 const spanRangeValue = document.querySelector("div.main-controls__item.rollback span[class=range-value]");
-const totalInput = document.getElementsByClassName("total-input");
+const inputTotal = document.getElementsByClassName("total-input")[0];
+const inputTotalCount = document.getElementsByClassName("total-input")[1];
+const inputTotalOther = document.getElementsByClassName("total-input")[2];
+const inputFullCount = document.getElementsByClassName("total-input")[3];
+const inputCountRollback = document.getElementsByClassName("total-input")[4];
 
 let divScreens = document.querySelectorAll('.screen');
 
@@ -147,18 +152,19 @@ otherItemsNumber.forEach(function (items) {
     console.log(items);
 });
 
-for (let item of totalInput) {
-    console.log(item);
-};
-
-console.log(titles[0]);
-console.log(buttons[0]);
-console.log(buttons[1]);
+console.log(title);
+console.log(buttonStart);
+console.log(buttonReset);
 console.log(buttonPlus);
 console.log(otherItems);
 console.log(inputRange);
 console.log(spanRangeValue);
 console.log(divScreens);
+console.log(inputTotal);
+console.log(inputTotalCount);
+console.log(inputTotalOther);
+console.log(inputFullCount);
+console.log(inputCountRollback);
 
 
 

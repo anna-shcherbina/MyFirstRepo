@@ -48,32 +48,32 @@ const appData = {
 
     start: function () {
         appData.revise();
-        appData.addScreens();
-        appData.addServices();
-        appData.addPrices();
-        //appData.logger();
+        if (!appData.isError) {
+            appData.addScreens();
+            appData.addServices();
+            appData.addPrices();
+            //appData.logger();
+            appData.showResult();
+        }
         console.log(appData);
-
-        appData.showResult();
     },
 
     revise: function () {
+
         screens = document.querySelectorAll(".screen");
         appData.isError = false;
 
-        if (!appData.isError) {
-            screens.forEach(function (screen) {
+        screens.forEach(function (screen) {
+            const select = screen.querySelector("select");
+            const input = screen.querySelector("input");
 
-                const select = screen.querySelector("select");
-                const input = screen.querySelector("input");
-
-                if (select.value.trim().length === 0 || input.value.trim().length === 0) {
-                    appData.isError = true;
-                    console.log('isError в функции revise');
-                }
-                select.addEventListener("change", appData.revise);
-            })
-        }
+            if (select.value.trim().length === 0
+                || input.value.trim().length === 0) {
+                appData.isError = true;
+                console.log('isError в функции revise: true');
+            }
+            select.addEventListener("change", appData.revise);
+        })
     },
 
     showResult: function () {

@@ -58,16 +58,22 @@ const appData = {
     },
 
     revise: function () {
-        screens = document.querySelectorAll(".screen")
-        screens.forEach(function (screen) {
-            const select = screen.querySelector("select");
-            const input = screen.querySelector("input");
-            if (select.value.trim().length === 0 || input.value.trim().length === 0) {
-                appData.isError = false;
-                console.log('isError в функции revise');
-            }
-            select.addEventListener("change", appData.revise);
-        })
+        screens = document.querySelectorAll(".screen");
+        appData.isError = false;
+
+        if (!appData.isError) {
+            screens.forEach(function (screen) {
+
+                const select = screen.querySelector("select");
+                const input = screen.querySelector("input");
+
+                if (select.value.trim().length === 0 || input.value.trim().length === 0) {
+                    appData.isError = true;
+                    console.log('isError в функции revise');
+                }
+                select.addEventListener("change", appData.revise);
+            })
+        }
     },
 
     showResult: function () {

@@ -43,7 +43,6 @@ const appData = {
         inputRange.addEventListener("input", this.getRollbackValue);
         buttonStart.addEventListener('click', newStart);
         buttonPlus.addEventListener('click', this.addScreenBlock);
-        //console.log(this);
         buttonReset.addEventListener('click', newReset);
     },
 
@@ -60,6 +59,15 @@ const appData = {
             this.blocking();
             this.showResult();
         }
+        console.log(this);
+    },
+
+    resetScreens: function () {
+        this.screens = [];
+        this.screensCount = 0;
+        this.servicesNumber = {}; // ? не обнуляет!
+        this.servicesPercent = {};
+
         console.log(this);
     },
 
@@ -89,10 +97,10 @@ const appData = {
         inputCountRollback.value = this.servicePercentPrice;
     },
 
-    clearShowResult: function () { //не работает
+    clearShowResult: function () {
         this.screenPrice = 0;
         this.servicePricesPercent = 0;
-        this.servicePricesPercent = 0;
+        this.servicePricesNumber = 0;
         this.fullPrice = 0;
         this.servicePercentPrice = 0;
         inputTotal.value = 0;
@@ -117,6 +125,7 @@ const appData = {
             const count = +input.value; //заносится число а не строка
 
             screens = document.querySelectorAll('.screen');
+
             this.screens.push({
                 id: index,
                 name: selectName,
@@ -205,18 +214,20 @@ const appData = {
         this.clearBlock();
         this.clearCheckbox(otherItemsPercent);
         this.clearCheckbox(otherItemsNumber);
-        this.clearShowResult()
         this.unblocking();
         this.clearInputRange();
         this.clearShowResult();
+        this.resetScreens();
+
+        console.log(this);
+        console.dir(this);
     },
 
     unblocking: function () {
         const elemInput = document.querySelectorAll('input');
-
-        //const elemInput = document.querySelectorAll('div.main-controls__input input[type = text]');
         const viewsSelect = document.querySelectorAll("div.main-controls__select select[name=views-select]");
         const check = document.querySelectorAll('div.main-controls__views.element input[type=checkbox]');
+
         elemInput.forEach((input) => { //поля доп.услуг со значениями по умолчанию остаются в блоке
             input.disabled = false;
         });
@@ -227,7 +238,6 @@ const appData = {
             input.disabled = false;
         });
         buttonPlus.disabled = false;
-
     },
 
     deleteScreenBlocks: function () {

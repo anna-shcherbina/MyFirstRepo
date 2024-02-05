@@ -36,14 +36,12 @@ const appData = {
     servicePercentPrice: 0,
 
     init: function () {
-        const newReset = this.reset.bind(appData);
-        const newStart = this.start.bind(appData); // привязка контекста вызова в первом запускающемся методе start
-
         this.addTitle();
-        inputRange.addEventListener("input", this.getRollbackValue);
-        buttonStart.addEventListener('click', newStart);
+
+        inputRange.addEventListener("input", this.getRollbackValue.bind(this));
+        buttonStart.addEventListener('click', this.start.bind(this)); // привязка контекста вызова в первом запускающемся методе start
         buttonPlus.addEventListener('click', this.addScreenBlock);
-        buttonReset.addEventListener('click', newReset);
+        buttonReset.addEventListener('click', this.reset.bind(this));
     },
 
     addTitle: function () {
@@ -60,12 +58,13 @@ const appData = {
             this.showResult();
         }
         console.log(this);
+        console.dir(this);
     },
 
     resetScreens: function () {
         this.screens = [];
         this.screensCount = 0;
-        this.servicesNumber = {}; // ? не обнуляет!
+        this.servicesNumber = {};
         this.servicesPercent = {};
 
         console.log(this);
@@ -181,7 +180,7 @@ const appData = {
 
     addScreenBlock: function () {
         const cloneScreen = screens[0].cloneNode(true);
-        screens = document.querySelectorAll('.screen'); //нам надо обновлять коллекцию screens каждый раз перед тем, как добавить новый блок в конец, чтобы получать новую длину коллекции
+        screens = document.querySelectorAll('.screen'); //надо обновлять коллекцию screens каждый раз перед тем, как добавить новый блок в конец, чтобы получать новую длину коллекции
         screens[screens.length - 1].after(cloneScreen);
     },
 
